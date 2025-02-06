@@ -1,12 +1,10 @@
 import { Router } from "express";
-import { STATUS } from "../config/status.js";
+import { getAllNews } from "../controllers/getAllNewsConfig.js";
+import { archiveNews } from "../controllers/archiveNews.js";
 
 const router = Router();
 
-router.use("/", (req, res) => {
-  res.status(STATUS.OK).json({
-    message: "endpoint principal",
-  });
-});
+router.use("/getAllNews", getAllNews);
+router.use("/archiveNews/:id", archiveNews);
 
 export default router;
