@@ -1,10 +1,9 @@
 import { STATUS } from "../config/status.js";
 import { News } from "../models/news.schema.js";
 
-export const archiveNews = async (req, res) => {
+export const restoreNews = async (req, res) => {
   const { id } = req.params;
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("es-ES");
+
   try {
     const news = await News.findById(id);
 
@@ -14,13 +13,13 @@ export const archiveNews = async (req, res) => {
         .json({ message: "Noticia no encontrada" });
     }
 
-    news.achieved = true;
-    news.archiveDate = formattedDate;
+    news.achieved = false;
+    news.archiveDate = null;
 
     await news.save();
 
     res.status(STATUS.OK).json({
-      message: `Noticia con ID ${id} archivada correctamente`,
+      message: `Noticia con ID ${id} restaurada correctamente`,
       archivedNews: news,
     });
   } catch (error) {

@@ -3,10 +3,7 @@ import { DATABASE_URL } from "./variables.js";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(DATABASE_URL);
     console.log("🟢 Conectado a MongoDB");
   } catch (error) {
     console.error("🔴 Error conectando a MongoDB:", error);

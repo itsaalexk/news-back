@@ -7,7 +7,7 @@ const newsSchema = new mongoose.Schema({
   date: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: String, required: true },
-  archiveDate: { type: String, required: true },
+  archiveDate: { type: String, default: null },
   achieved: { type: Boolean, required: true, default: false },
 });
 
