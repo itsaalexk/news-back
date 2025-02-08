@@ -8,6 +8,9 @@ export const getAllNews = async (req, res) => {
     const limit = 10;
     const skip = (page - 1) * limit;
     const archived = req.query.archived === "true";
+    console.log("archived", archived);
+    console.log("query", query);
+    console.log("page", page);
 
     let filter = { achieved: archived };
 
