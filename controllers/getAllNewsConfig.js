@@ -3,7 +3,7 @@ import { News } from "../models/news.schema.js";
 
 export const getAllNews = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
+    const page = parseInt(req.query.page) ?? 1;
     const query = req.query.q ? req.query.q.trim() : "";
     const limit = 10;
     const skip = (page - 1) * limit;
@@ -21,7 +21,12 @@ export const getAllNews = async (req, res) => {
       };
     }
 
-    const news = await News.find(filter).skip(skip).limit(limit);
+    const sortByLatestDate = archived ? { archiveDate: -1 } : { date: -1 };
+
+    const news = await News.find(filter)
+      .sort(sortByLatestDate)
+      .skip(skip)
+      .limit(limit);
     const total = await News.countDocuments(filter);
 
     res.json({ news, total, page, totalPages: Math.ceil(total / limit) });
