@@ -9,6 +9,7 @@ const newsSchema = new mongoose.Schema({
   author: { type: String, required: true },
   archiveDate: { type: String, default: null },
   achieved: { type: Boolean, required: true, default: false },
+  isFavorite: { type: Boolean, required: true, default: false },
 });
 
 export const News = mongoose.model("News", newsSchema);
