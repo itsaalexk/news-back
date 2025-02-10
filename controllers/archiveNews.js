@@ -4,7 +4,7 @@ import { News } from "../models/news.schema.js";
 export const archiveNews = async (req, res) => {
   const { id } = req.params;
   const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("es-ES");
+  const formattedDate = currentDate.toISOString();
   try {
     const news = await News.findById(id);
 
